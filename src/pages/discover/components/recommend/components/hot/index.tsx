@@ -35,15 +35,17 @@ const Hot: React.FC = () => {
           HotList.map((item:any)=>{
               return (
                 <ListItem key={item.id}>
-                  <Link to='/'>
+
                       <div className='hot-item'>
                       <img src={`${item.picUrl}?param=140y140`} alt=""/>
-                        <div className='bottom'>
-                            <span className='count'>33万</span>
-                            <span className='play'></span>
+                      <Link to="/" className='mask'> </Link>
+                        <div className='bottom msk'>
+                           <div><span className='icon-headset'></span>
+                            <span className='count'>33万</span></div>
+                            <div><span className='play'></span></div>
                         </div>
                       </div>
-                  </Link>
+
                 <div className='title'>{item.name}</div>
                 </ListItem>
               )

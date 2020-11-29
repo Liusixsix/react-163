@@ -16,7 +16,7 @@ const SwiperItem: React.FC<Iprops> = (props) => {
     <SliderItem>
       <div className="album-image">
         <img src={picUrl + "?param=100x100"} alt="" />
-        <a href="/" className="cover img_cover"></a>
+        <a href="/" className="cover img_cover"> </a>
       </div>
       <div className="album-name text-nowrap">{author}</div>
       <div className="artist text-nowrap">{name}</div>

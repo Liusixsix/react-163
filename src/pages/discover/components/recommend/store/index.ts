@@ -8,6 +8,7 @@ export enum actionTypes {
   CHANGE_UP_RANKING = "CHANGE_UP_RANKING",
   CHANGE_NEW_RANKING = "CHANGE_NEW_RANKING",
   CHANGE_ORIGIN_RANKING = "CHANGE_ORIGIN_RANKING",
+  CHANGE_ARTIST = 'CHANGE_ARTIST'
 }
 
 interface defaultState {
@@ -17,6 +18,7 @@ interface defaultState {
   upRanking: any;
   newRanking: any;
   originRanking: any;
+  artist:any[]
 }
 
 const defaultState: defaultState = {
@@ -27,6 +29,7 @@ const defaultState: defaultState = {
   upRanking: {},
   newRanking: {},
   originRanking: {},
+  artist:[]
 };
 
 export default function reducer(state = defaultState, action: any) {
@@ -43,6 +46,8 @@ export default function reducer(state = defaultState, action: any) {
       return { ...state, newRanking: action.data };
     case actionTypes.CHANGE_ORIGIN_RANKING:
       return { ...state, originRanking: action.data };
+      case actionTypes.CHANGE_ARTIST:
+        return { ...state, artist: action.data }
     default:
       return state;
   }

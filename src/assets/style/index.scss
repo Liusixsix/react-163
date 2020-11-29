@@ -71,6 +71,35 @@ body, html, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, header, menu, sectio
   .img_cover{
     background: url(../image//sprite_cover.png) no-repeat -145px -57px;
   }
+  .button2{
+    background: url(../image//button2.png) no-repeat  no-repeat 0 9999px;
+  }
+  .sprite_icon2{
+    background: url(../image//sprite_02.png) no-repeat  no-repeat 0 9999px;
+  }
+.icon-headset{
+  display: inline-block;
+    width: 14px;
+    height: 11px;
+    // margin: 9px 5px 9px 10px;
+    margin-right: 5px;
+    vertical-align: middle;
+    background: url(../image//iconall.png) no-repeat 0 9999px;
+    background-position: 0 -24px;
+}
+.msk{
+  background: url(../image//sprite_cover.png) no-repeat 0 9999px;
+}
+.mask{
+    background: url(../image//sprite_cover.png) no-repeat 0 9999px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-position: 0 0;
+}
+
   .prefix{
     height: 14px;
     width: 14px;

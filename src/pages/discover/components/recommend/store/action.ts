@@ -5,6 +5,7 @@ import {
   getHotList,
   getNewest,
   getPlayList,
+  getArtist
 } from "@/service/recommend";
 
 export const changeTopBannerAction = (res: any) => ({
@@ -36,6 +37,12 @@ export const changeOriginRanking = (res: any) => ({
   type: actionTypes.CHANGE_ORIGIN_RANKING,
   data: res.playlist,
 });
+
+export const changeArtist = (res: any) => ({
+  type: actionTypes.CHANGE_ARTIST,
+  data: res.artists,
+});
+
 
 // 异步
 
@@ -81,3 +88,12 @@ export const getTopListAction = (id: number) => {
     });
   };
 };
+
+
+export const getArtistAction = ()=>{
+  return (dispatch:any)=>{
+    getArtist().then(res=>{
+      dispatch(changeArtist(res))
+    })
+  }
+}

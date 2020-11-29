@@ -84,5 +84,6 @@ export const TopRankingWrapper = styled.div`
     .bottom{
         line-height:32px;
         text-align:right;
+        padding-right:10px;
     }
 `

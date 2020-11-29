@@ -29,3 +29,9 @@ export const getPlayList = (id:number)=>{
         }
     })
 }
+
+export const getArtist = ()=>{
+    return request({
+        url:'/artist/list?limit=5'
+    })
+}

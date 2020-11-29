@@ -60,12 +60,12 @@ export const ListItem = styled.li`
       width:100%;
       height: 27px;
       color: #ccc;
-      background:rgba(0,0,0,.5);
       display:flex;
       justify-content:space-between;
       align-items:center;
       font-size:12px;
       padding:0 10px;
+      background-position: 0 -537px;
     }
   }
 

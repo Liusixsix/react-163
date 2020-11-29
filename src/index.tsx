@@ -8,11 +8,13 @@ import './assets/iconfont/iconfont.css'
 import store from './store';
 import routes from './router'
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 ReactDOM.render(
   <Provider store={store}>
       <Router>
         <Header />
          {renderRoutes(routes)}
+         <Footer />
       </Router>
   </Provider>
     ,
