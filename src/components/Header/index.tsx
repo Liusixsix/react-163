@@ -20,12 +20,12 @@ export default function Header(props: any) {
     history.push(link);
   };
 
-  useEffect(()=>{
-    inpEl.current?.focus() 
-   return ()=>{
-    inpEl.current?.blur() 
-    }
-  })
+  // useEffect(()=>{
+  //   inpEl.current?.focus() 
+  //  return ()=>{
+  //   inpEl.current?.blur() 
+  //   }
+  // })
   
   const getSearchData = (keywords: any) => {
     getSearchSongData(keywords).then((res: any) => {

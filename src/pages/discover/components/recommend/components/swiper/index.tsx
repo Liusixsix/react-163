@@ -68,4 +68,4 @@ const Swiper: React.FC = memo((props) => {
     </div>
   );
 });
-export default Swiper;
+export default memo(Swiper);

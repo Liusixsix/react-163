@@ -8,7 +8,12 @@ const SuspenseComponent = (Component:any) => (props:any) => {
       </Suspense>
     );
   };
-
+  const main = (props:any)=>{
+    console.log(props)
+    return (
+      <div>main</div>
+    )
+  }
 const JMDiscover  = lazy(()=>import("../pages/discover"))
 const Recommend = lazy(()=>import("../pages/discover/components/recommend"))
 const router = [
@@ -25,13 +30,20 @@ const router = [
           {
             path: "/discover/recommend",
             component: Recommend,
+            routes:[
+              {path:'/discover/recommend', exact: true, render:()=><div>默认</div>},
+              {path:'/discover/recommend/about',render:()=><div>关于</div>},
+              {path:'/discover/recommend/abc',render:()=><div>abc</div>}
+            ]
           }
         ]
     },
     {
       path: "/mine",
-      component: ()=> <div>2333</div>,
+      component: main
     }
 ]
+
+
 
 export default router
