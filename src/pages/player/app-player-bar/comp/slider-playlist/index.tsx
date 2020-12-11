@@ -4,6 +4,7 @@ import { ClearOutlined, CloseOutlined, HeartOutlined } from "@ant-design/icons";
 import { useDispatch,useSelector,shallowEqual } from "react-redux";
 import {changePlayListAction, getSongDetailAction} from '../../../store/action'
 import Playlistitem from "./comp/playlistitem";
+import LyricContent from "./comp/playlistitem/lyric-content";
 interface Iprops {
   isShowSlider: boolean;
   currentSong:any,
@@ -14,7 +15,7 @@ interface Iprops {
 }
 
 export default memo(function SliderPlaylist(props: Iprops) {
-  const {currentSong,closeWindow,playListCount } = props;
+  const {currentSong,closeWindow,playListCount,changeSong } = props;
 
   const dispatch = useDispatch()
   const {  playList, currentSongIndex } = useSelector(
@@ -76,12 +77,14 @@ export default memo(function SliderPlaylist(props: Iprops) {
                                   duration={item.dt}
                                   songId={item.id}
                                   clickItem={()=>clickItem(index,item)}
+                                  changeMusic={changeSong}
                                 ></Playlistitem>
                             })
               }
          
           </div>       
          <div className="main-line"></div>
+         <LyricContent />
       </SliderPlaylistMain>
     </SliderPlayListWrap>
   );

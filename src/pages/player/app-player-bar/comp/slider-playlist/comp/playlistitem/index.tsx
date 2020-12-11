@@ -2,7 +2,8 @@ import React, { memo } from 'react'
 import {PlaylistItemWrapper} from './style'
 import { DownloadOutlined,DeleteOutlined,GithubOutlined,LikeOutlined } from '@ant-design/icons'
 import { formatDate } from '@/utils'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { changePlayListAction } from '@/pages/player/store/action'
 interface Iprops{
     songName:string
     singer:string
@@ -10,12 +11,25 @@ interface Iprops{
     songId:number
     clickItem:()=>void
     isActice?:string
+    changeMusic:(tag)=>void
 }
 
 export default memo(function PlaylistItem(props:Iprops) {
-    const {songName,singer,clickItem,isActice,duration} = props
+    const {songName,singer,clickItem,isActice,duration,songId,changeMusic} = props
 
-    const clearCurrentSong =()=>{
+     // redux hook
+  const dispatch = useDispatch()
+  const {playList} = useSelector((state:any) => ({
+    playList: state.getIn(['play', 'playList'])
+  }))
+
+    const clearCurrentSong =(e)=>{
+        e.stopPropagation()
+        const currentSongIndex = playList.findIndex(song=>song.id === songId)
+        if(playList.length<=1)return
+        playList.splice(currentSongIndex,1)
+        dispatch(changePlayListAction(playList))
+        changeMusic(1)
 
     }
     return (
@@ -25,7 +39,7 @@ export default memo(function PlaylistItem(props:Iprops) {
                 <LikeOutlined />
                 <GithubOutlined />
                 <DownloadOutlined />
-                <DeleteOutlined onClick={e=>clearCurrentSong()} />
+                <DeleteOutlined onClick={e=>clearCurrentSong(e)} />
                  <span>{singer}</span>
             </div>
              <div className="duration">{formatDate(duration,'mm:ss')}</div>
