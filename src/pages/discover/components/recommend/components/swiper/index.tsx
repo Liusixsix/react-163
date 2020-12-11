@@ -14,7 +14,7 @@ const Swiper: React.FC = memo((props) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const dispatch = useDispatch()
-  const topBanners:banner[] = useSelector((state:any)=>state.recommend.topBanners)
+  const topBanners:banner[] = useSelector((state:any)=>state.getIn(['recommend','topBanners']))
 
   useEffect(() => {
     dispatch(getTopBannersAction())

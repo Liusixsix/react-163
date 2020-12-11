@@ -65,7 +65,7 @@ export const TopRankingWrapper = styled.div`
         .index{
             width: 35px;
             height: 32px;
-            margin-left: 35px;
+            margin-left: 15px;
             text-align: center;
             color: #666;
             font-size: 16px;
@@ -75,15 +75,47 @@ export const TopRankingWrapper = styled.div`
             }
         }
         .item-name{
-            width: 170px;
             height: 32px;
             color:#000;
             font-size:12px;
+            width:auto;
+        }
+        &:hover{
+            .item-name{   
+                width: 90px;
+            }
+            .OperWrap{
+                visibility:visible;
+                width:auto;
+            }
         }
     }
     .bottom{
         line-height:32px;
         text-align:right;
         padding-right:10px;
+    }
+`
+
+export const OperWrap = styled.div`
+    display:flex;
+    width:0px;
+        visibility: hidden;
+    /* background:pink; */
+    .btn{
+        width: 17px;
+        height: 17px;
+        margin-left: 8px;
+        cursor: pointer;
+        &.play{
+            background-position: -267px -268px;
+        }
+        &.addto{
+            background-position: 0px -700px;
+            margin-top:2px;
+        }
+        &.favourite{
+            background-position: -297px -268px;
+        }
     }
 `

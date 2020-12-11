@@ -80,7 +80,7 @@ export default memo(function Right() {
       dispatch(getArtistAction());
     }, [dispatch]);
   
-    const artist = useSelector((state: any) => state.recommend.artist);
+    const artist = useSelector((state: any) => state.getIn(['recommend','artist']));
     return (
       <RightWrapper>
         <LoginWrap></LoginWrap>

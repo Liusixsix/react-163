@@ -20,6 +20,15 @@ export const Header = styled.div`
   .header-right {
     font-size: 12px;
     color: #666;
+    vertical-align:middle;
+    .more{
+      display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-left: 2px;
+    vertical-align: middle;
+      background-position: 0 -240px;
+    }
   }
 `;
 export const ItemWrap = styled.ul`

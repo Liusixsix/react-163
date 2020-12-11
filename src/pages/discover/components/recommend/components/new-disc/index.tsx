@@ -26,7 +26,7 @@ const SwiperItem: React.FC<Iprops> = (props) => {
 
 const NewDisc = () => {
   const dispatch = useDispatch();
-  const NewDiscList = useSelector((state: any) => state.recommend.newEst);
+  const NewDiscList = useSelector((state: any) => state.getIn(['recommend','newEst']));
   const SwiperRef = useRef<any>()
 
   useEffect(() => {

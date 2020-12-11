@@ -4,12 +4,13 @@ import { HotWrap,  ItemWrap,ListWrap,ListItem } from "./style";
 import HotHeader from './hot-header'
 import { useDispatch, useSelector } from "react-redux";
 import {getHotListAction} from '../../store/action'
+import {getCount} from '@/utils'
 const itemList: string[] = ["华语", "流行", "摇滚", "民谣", "电子"];
 
 const Hot: React.FC = () => {
 
   const dispatch = useDispatch()
-  const HotList = useSelector((state:any)=>state.recommend.hotList)
+  const HotList = useSelector((state:any)=>state.getIn(['recommend','hotList']))
   useEffect(()=>{
     dispatch(getHotListAction())
   },[dispatch])
@@ -41,7 +42,7 @@ const Hot: React.FC = () => {
                       <Link to="/" className='mask'> </Link>
                         <div className='bottom msk'>
                            <div><span className='icon-headset'></span>
-                            <span className='count'>33万</span></div>
+              <span className='count'>{getCount(item.playCount)}</span></div>
                             <div><span className='play'></span></div>
                         </div>
                       </div>

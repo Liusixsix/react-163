@@ -1,6 +1,6 @@
 import React from 'react'
 import {Header} from './style'
-
+import {Link} from 'react-router-dom'
 
 interface Iprops{
     title:string
@@ -14,7 +14,10 @@ const HotHeader:React.FC<Iprops> = (props)=>{
              <h2 className="title">{props.title}</h2>
              {props.children}
         </div>
-        <div className='header-right'>更多</div>
+        <div className='header-right'>
+            <Link to='/'>更多</Link>
+            <span className='sprite_02 more'></span>
+        </div>
       </Header>
     )
 
