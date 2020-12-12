@@ -1,15 +1,46 @@
-import React, { memo } from 'react'
-import {PlayListWrapper,HeaderWrapper} from './style'
-
+import { fromJS } from 'immutable'
+import React, { memo, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getTopItemInfoAction } from '../../store/action'
+import {ToplistMainWrapper} from './style'
+import SongItem from '../song-item'
 
 export default memo(function PlayList() {
+    const dispatch = useDispatch()
+
+    const {currentToplistId,currentToplist=[]} = useSelector((state:any)=>({
+        currentToplistId:state.getIn(['ranking','currentToplistId']),
+        currentToplist:state.getIn(['ranking','currentToplist'])
+    }))
+
+    useEffect(()=>{
+        dispatch(getTopItemInfoAction(currentToplistId))
+    },[currentToplistId, dispatch])
     return (
-        <PlayListWrapper>
-            <HeaderWrapper>
-                <div className='cover'>
-                    <img src="http://p2.music.126.net/DrRIg6CrgDfVLEph9SNh7w==/18696095720518497.jpg?param=150y150" alt=""/>
-                </div>
-            </HeaderWrapper>
-        </PlayListWrapper>
+        <ToplistMainWrapper>
+             <div className="toplist-main">
+                <div className="main-header">
+                <div className="sprite_table header-item"></div>
+                <div className="sprite_table header-item header-title">标题</div>
+                <div className="sprite_table header-item header-time">时长</div>
+                <div className="sprite_table header-item header-singer">歌手</div>
+            </div>
+            <div className="main-list">
+                {
+                    currentToplist.map((item,index)=>{
+                        return  <SongItem
+                                    key={item.id}
+                                    currentRanking={index+1} 
+                                    coverPic={index < 3?item.al.picUrl:''}
+                                    songName={item.name}
+                                    singer={item.ar[0].name}
+                                    songId={item.id}
+                                 ></SongItem>
+                    })
+                }
+               
+            </div>
+        </div>
+        </ToplistMainWrapper>
     )
 })

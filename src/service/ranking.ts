@@ -6,3 +6,11 @@ export const getTopList = ()=>{
         url:'/toplist'
     })
 }
+export function getToplistDetail(id) {
+    return requset({
+      url: '/playlist/detail',
+      params: {
+        id
+      }
+    })
+  }

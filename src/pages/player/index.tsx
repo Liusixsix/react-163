@@ -1,12 +1,15 @@
 import React, { memo } from 'react'
 import { SongDetailWrapper, SongLeft, SongRight } from './style'
 import SongInfo from './comp/song-info'
-export default memo(function Player() {
+import SongComment from './comp/song-comment'
+
+export default memo(function Player(props) {
     return (
         <SongDetailWrapper>
             <div className='content w980'>
                 <SongLeft>
                     <SongInfo></SongInfo>
+                    <SongComment></SongComment>
                 </SongLeft>
                 <SongRight>
                 <h2>SongInclude 包含音乐</h2>

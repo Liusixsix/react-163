@@ -57,7 +57,9 @@ export function formatDate(time, fmt?) {
     return fmt
   }
   
-
+  export function formatMonthDay(time) {
+    return formatDate(time, 'MM月dd日')
+  }
 
 function _padLeftZero(str) {
     return ('00' + str).substr(str.length)

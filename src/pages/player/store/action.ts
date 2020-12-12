@@ -1,4 +1,4 @@
-import { getLyric, getSongDetail } from "@/service/player";
+import { getLyric, getSongDetail ,getHotComment} from "@/service/player";
 import { actionTypes } from "./index";
 import {getRandom} from '@/utils'
 import { parseLryic } from "@/utils/parse-lyric";
@@ -29,6 +29,11 @@ export const changeCurretLyricIndex = (index) => ({
   index,
 });
 
+
+export const changeHotComments = (hotComments) => ({
+  type: actionTypes.CHANGE_HOT_COMMENT,
+  hotComments,
+});
 
 
 export const changeSequence = (sequence: number) => ({
@@ -99,4 +104,26 @@ export const getLyricAction = (id)=>{
          dispatch(changeLyricListAction(lyricList))
         })
     }
+}
+
+export const getAddSongDeatilAction = (id)=>{
+  return (dispatch,getState) => {
+    getSongDetail(id).then((res:any)=>{
+      const playList = getState().getIn(['play', 'playList'])
+      const songIndex = playList.findIndex(song => song.id === id)
+      if(songIndex!==-1)return
+      const willAddSong = res.songs && res.songs[0]
+      playList.push(willAddSong)
+      dispatch(changePlayListAction(playList))
+    })
+  }
+}
+
+export const getHotCommentAction = id=>{
+  return dispatch =>{
+    getHotComment(id).then((res:any)=>{
+      const hotComments = res && res.hotComments 
+      dispatch(changeHotComments(hotComments))
+    })
+  }
 }

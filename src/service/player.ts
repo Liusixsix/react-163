@@ -17,3 +17,14 @@ export function getLyric(id){
         }
     })
 }
+
+export function getHotComment(id, type = 0) {
+    return request({
+      url: '/comment/hot',
+      params: {
+        id,
+        type,
+      },
+    });
+  }
+  

@@ -6,7 +6,8 @@ export enum actionTypes {
   CHANGE_PLAY_LIST = 'CHANGE_PLAY_LIST',
   CHANGE_SEQUENCE = 'CHANGE_SEQUENCE',
   CHANGE_LYRIC = 'CHANGE_LYRIC',
-  CHANGE_CURRENT_LYRIC_INDEX='CHANGE_CURRENT_LYRIC_INDEX'
+  CHANGE_CURRENT_LYRIC_INDEX='CHANGE_CURRENT_LYRIC_INDEX',
+  CHANGE_HOT_COMMENT = 'CHANGE_HOT_COMMENT'
 }
 
 
@@ -17,6 +18,7 @@ const defaultState = Map({
   sequence: 0, // 0 循环播放 1随机播放  2单曲循环
   lyricList:[],
   currentLyricIndex:0,
+  hotComments:[]
 });
 
 export default function reducer(state = defaultState, action: any) {
@@ -33,6 +35,8 @@ export default function reducer(state = defaultState, action: any) {
           return state.set("lyricList", action.lyricList);
           case actionTypes.CHANGE_CURRENT_LYRIC_INDEX:
             return state.set("currentLyricIndex", action.index);
+            case actionTypes.CHANGE_HOT_COMMENT:
+              return state.set("hotComments", action.hotComments);
     default:
       return state;
   }

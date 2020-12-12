@@ -6,17 +6,30 @@ import {
   RankListWrapper,
 } from "./style";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getTopListAction } from "./store/action";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { changeCurrentId, getTopListAction } from "./store/action";
 import { RankListWrap } from "../recommend/components/ranking/style";
-import PlayList from './comp/play-list'
-
+import PlayList from "./comp/play-list";
+import TopTitle from "./comp/top-title";
 interface Iprops {
   title: string;
   data: any[];
 }
 const RankingList: React.FC<Iprops> = (props) => {
   const { data } = props;
+
+  const dispatch = useDispatch();
+  const {currentToplistTitleInfo,currentToplistId} = useSelector((state: any) => ({
+    currentToplistTitleInfo:state.getIn(['ranking','currentToplistTitleInfo']),
+    currentToplistId:state.getIn(['ranking','currentToplistId'])
+  }),shallowEqual)
+
+  const clickItem = (e, item) => {
+    e.preventDefault();
+    dispatch(changeCurrentId(item.id))
+   
+  };
+ 
   return (
     <RankListWrapper>
       <div className="header">
@@ -25,8 +38,12 @@ const RankingList: React.FC<Iprops> = (props) => {
       <ul>
         {data.map((item: any) => {
           return (
-            <li key={item.id}>
-              <Link to="/" className="item ">
+            <li key={item.id} >
+              <Link
+                to="/"
+                onClick={(e) => clickItem(e, item)}
+                className={item.id ===currentToplistId?'item active':'item' }
+              >
                 <div className="head">
                   <img src={item.coverImgUrl + "?param=44x44"} alt="" />
                 </div>
@@ -41,14 +58,13 @@ const RankingList: React.FC<Iprops> = (props) => {
       </ul>
     </RankListWrapper>
   );
-
-    
-
 };
 
 const Ranking: React.FC = () => {
   const dispatch = useDispatch();
-  const topList = useSelector((state: any) => state.getIn(['ranking','topList']));
+  const topList = useSelector((state: any) =>
+    state.getIn(["ranking", "topList"])
+  );
 
   useEffect(() => {
     dispatch(getTopListAction());
@@ -65,7 +81,8 @@ const Ranking: React.FC = () => {
           />
         </RankingLeft>
         <RankingRight>
-            <PlayList />
+          <TopTitle></TopTitle>
+          <PlayList />
         </RankingRight>
       </div>
     </RankingWrap>

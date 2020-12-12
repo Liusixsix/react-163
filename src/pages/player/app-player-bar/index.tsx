@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useRef, useState,useCallback } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { PlayerWrapper, PlayInfo, Operator,PlayBtn,LoopBtn} from "./style";
 import { Slider, Tooltip,message } from "antd";
 import { DownloadOutlined, UndoOutlined } from "@ant-design/icons";
@@ -9,10 +9,10 @@ import { getSongDetailAction,changeSequence, changeCurrenSong,changeCurretLyricI
 import {formatDate,getPlayUrl} from '@/utils'
 import SliderPlaylist from "./comp/slider-playlist";
 
-export default memo(function Player() {
+export default memo(function Player(props) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isShowBar, setIsShowBar] = useState(false); //是否显示音量播放条
-  const [isShowSlide,setIsShowSlide] = useState(true)
+  const [isShowSlide,setIsShowSlide] = useState(false)
   const [isChanging, setIsChanging] = useState(false); // 是否正在滑动
   const [isPlaying, setIsPlaying] = useState(false); // 是否正在播放
   const [currentTime,setCurrentTime] = useState(0)
@@ -30,6 +30,8 @@ export default memo(function Player() {
     shallowEqual
   );
  
+
+  const history = useHistory()
 
   useEffect(() => {
     dispatch(getSongDetailAction(167876));
@@ -138,6 +140,18 @@ export default memo(function Player() {
     setIsShowSlide(!isShowSlide)
   },[isShowSlide])
 
+
+  const clickSong = (e)=>{
+    e.preventDefault()
+    console.log(history)
+    history.push({
+      pathname:'/discover/song',
+      state:{
+        id:currentSong.id
+      }
+    })
+  }
+
   return (
     <PlayerWrapper className="playbar_sprite">
       <div className="center w980">
@@ -157,7 +171,7 @@ export default memo(function Player() {
           </NavLink>
           <div className="play-detail">
             <div className="song-info">
-              <NavLink to="/discover/song" className="song-name">
+              <NavLink to="/discover/song" onClick={e=>clickSong(e)} className="song-name">
                 {currentSong.name}
               </NavLink>
               <a href="/author" className="singer-name">

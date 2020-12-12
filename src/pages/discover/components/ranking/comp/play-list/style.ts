@@ -1,23 +1,38 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
+export const ToplistMainWrapper = styled.div`
+  padding: 10px 40px;
 
-export const PlayListWrapper = styled.div`
-         border-width: 0px 1px;
-         border-style: solid;
-         border-color: rgb(211, 211, 211);
-        border-left-width: 1px;
-`
+  .toplist-main {
+    border: 1px solid #d9d9d9;
+    font-size:12px;
+    .main-header {
+      display: flex;
+      .header-item {
+        width: 74px;
+        height: 34px;
+        line-height: 18px;
+        padding: 8px 10px;
+        background-position: 0 0;
+        background-repeat: repeat-x;
+        background-color: #f2f2f2;
+        color: #666;
 
-export const HeaderWrapper = styled.div`
-    padding:40px;
-    display:flex;
-  
-    .cover{
-        border: 1px solid #ccc;
-        padding:3px;
-        img{
-            width: 150px;
-            height: 150px;
+        &:first-child {
+          border-right: 1px solid #dadada;
         }
+        &.header-title {
+          width: 327px;
+          border-right: 1px solid #dadada;
+        }
+        &.header-singer {
+          width: 173px;
+        }
+        &.header-time {
+          width: 91px;
+          border-right: 1px solid #dadada;
+        }
+      }
     }
-`
+  }
+`;
