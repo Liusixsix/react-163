@@ -5,6 +5,7 @@ import { PlayCircleOutlined } from '@ant-design/icons'
 import {useDispatch, useSelector} from 'react-redux'
 import { getSongDetailAction } from '@/pages/player/store/action'
 import { useAddPlaylist } from '@/hook'
+import { formatDate } from '@/utils'
 
 interface Iprops{
     currentRanking:number
@@ -12,9 +13,11 @@ interface Iprops{
     songName:string
     singer:string
     songId:number
+    dt:number
+    ar:any[]
 }
 export default memo(function SongItem(props:Iprops) {
-    const {coverPic,songName,songId,currentRanking} = props
+    const {coverPic,songName,songId,currentRanking,dt,ar} = props
 
     const dispatch = useDispatch()
     const playList= useSelector((state:any)=>state.getIn(['play','playList']))
@@ -25,17 +28,68 @@ export default memo(function SongItem(props:Iprops) {
     }
     const addPlaylist  = useAddPlaylist(playList)
     return (
-       <SongItemWrapper>
-         <div className="song-item rank-count">{currentRanking}</div>
-         {true && (
+       <SongItemWrapper className={`${currentRanking <=3?'ranking':''}`}>
+         <div className={`song-item`}>
+            <div className='rank-count'>{currentRanking}</div>
+            <div className='song-info text-nowrap '>
+                {
+                  currentRanking<=3?(
+                    <div><img className='cover' src={coverPic + '?param=50y50'} alt="" /> 
+                    <PlayCircleOutlined
+                    className="font-active"
+                    onClick={(e) => playMusic(e)}
+                  />
+                     <a href="/play" onClick={(e) => playMusic(e)}  className="text-nowrap">
+                      {songName}
+                    </a>
+                  </div>
+                  ):(
+                    <div>
+                      <PlayCircleOutlined
+                    className="font-active"
+                    onClick={(e) => playMusic(e)}
+                  />
+                     <a href="/play" onClick={(e) => playMusic(e)}  className="text-nowrap">
+                      {songName}
+                    </a>
+                    </div>
+                  )
+                }
+            </div>
+         </div>
+         <div className='timer'>
+              <span className='time'>{formatDate(dt,"mm:ss")}</span>
+              <div className="right-operator">
+              <button
+                // href="/discover/recommend" 
+                className="sprite_icon2 btn addto"
+                onClick={e => addPlaylist(e,songId)}
+              ></button>
+            </div>
+            </div>
+            <div className='author text-nowrap'>
+              {
+                ar && ar.map((item,index)=>{
+                  return (
+                    <span key={item.name}><a>{item.name}</a>{index +1 < ar.length && '/'}</span>
+                  )
+                })
+              }
+            </div>
+       </SongItemWrapper>
+    )
+})
+
+
+{/* <div className="song-item rank-count">{currentRanking}</div>
             <NavLink
                 to="/discover/song"
                 className="song-item"
               onClick={(e) => playMusic(e, true)}
             >
-          <img src={coverPic + '?param=50y50'} alt="" />
+         {currentRanking <= 3  && <img className='cover' src={coverPic + '?param=50y50'} alt="" />}
         </NavLink>
-      )}
+      
         <div className="song-item song-info">
         <div className="left-info">
           <PlayCircleOutlined
@@ -48,12 +102,9 @@ export default memo(function SongItem(props:Iprops) {
         </div>
         <div className="right-operator">
           <button
-            // href="/discover/recommend"
+            // href="/discover/recommend" 
             className="sprite_icon2 btn addto"
             onClick={e => addPlaylist(e,songId)}
           ></button>
         </div>
-        </div>
-       </SongItemWrapper>
-    )
-})
+        </div> */}

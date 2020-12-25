@@ -8,6 +8,7 @@ import {CSSTransition} from 'react-transition-group'
 import { getSongDetailAction,changeSequence, changeCurrenSong,changeCurretLyricIndex } from "../store/action";
 import {formatDate,getPlayUrl} from '@/utils'
 import SliderPlaylist from "./comp/slider-playlist";
+import { useClick } from "@/hook/useClick";
 
 export default memo(function Player(props) {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -17,6 +18,8 @@ export default memo(function Player(props) {
   const [isPlaying, setIsPlaying] = useState(false); // 是否正在播放
   const [currentTime,setCurrentTime] = useState(0)
    const [progress,setProgress] = useState(0)
+
+   const comRef = useRef(null)
 
   const dispatch = useDispatch(); 
   const { currentSong = {} ,sequence,lyricList=[],currentLyricIndex,playList} = useSelector(
@@ -152,8 +155,10 @@ export default memo(function Player(props) {
     })
   }
 
+  
+  useClick(isShowSlide,comRef,changePlayListShow)
   return (
-    <PlayerWrapper className="playbar_sprite">
+    <PlayerWrapper className="playbar_sprite"  ref={comRef}>
       <div className="center w980">
         <div className="btns">
           <span className="playbar_sprite pre" onClick={e=>changeMusic(-1)}></span>

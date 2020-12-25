@@ -1,10 +1,11 @@
-import React, { memo, useCallback } from "react";
+import React, { memo, useCallback, useRef } from "react";
 import { SliderPlayListWrap, SliderPlaylistHeader,SliderPlaylistMain } from "./style";
 import { ClearOutlined, CloseOutlined, HeartOutlined } from "@ant-design/icons";
 import { useDispatch,useSelector,shallowEqual } from "react-redux";
 import {changePlayListAction, getSongDetailAction} from '../../../store/action'
 import Playlistitem from "./comp/playlistitem";
 import LyricContent from "./comp/playlistitem/lyric-content";
+import { useClick } from "@/hook/useClick";
 interface Iprops {
   isShowSlider: boolean;
   currentSong:any,
@@ -15,7 +16,11 @@ interface Iprops {
 }
 
 export default memo(function SliderPlaylist(props: Iprops) {
-  const {currentSong,closeWindow,playListCount,changeSong } = props;
+  const {currentSong,closeWindow,playListCount,changeSong,isShowSlider } = props;
+
+  
+  
+
 
   const dispatch = useDispatch()
   const {  playList, currentSongIndex } = useSelector(

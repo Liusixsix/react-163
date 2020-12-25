@@ -5,7 +5,7 @@
  * @param immediate 是否默认第一次立即执行
  */
 export const debounce = (func:any,time:number,immediate:boolean = false)=>{
-    let timer:number|undefined 
+    let timer:any|undefined 
     return function (this:any,...arg:any) {
         if(immediate){
             func.apply(this,arg)

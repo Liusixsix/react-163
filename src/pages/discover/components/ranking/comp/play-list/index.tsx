@@ -35,6 +35,8 @@ export default memo(function PlayList() {
                                     songName={item.name}
                                     singer={item.ar[0].name}
                                     songId={item.id}
+                                    dt={item.dt}
+                                    ar={item.ar}
                                  ></SongItem>
                     })
                 }
