@@ -6,17 +6,18 @@ export interface ISongsItemProps{
     name:string
     playCount:number
     coverImgUrl:string
-    nickname:string
+    nickname:string,
+    handleClickItem:(e:any)=>void
 }
 
 
 const SongsItem:React.FC<ISongsItemProps> = props=>{
-    const {name,playCount,coverImgUrl,nickname} = props
+    const {name,playCount,coverImgUrl,nickname,handleClickItem} = props
     return (
         <SongsItemWrapper>
             <div className='cover-wrapper'>
                 <img src={coverImgUrl + '?param=140x140'} alt=""/>
-                <a href="" className='mask'></a>
+                <a onClick={handleClickItem} href="" className='mask'></a>
 
                 <div className='bottom msk'>
                     <div className="left"> 

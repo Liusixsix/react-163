@@ -9,3 +9,14 @@ export const getSongs = (limit:number,offset:number)=>{
         }
     })
 }
+
+
+
+export const getSongsInfo = (id:number)=>{
+    return requset({
+        url:'/related/playlist',
+        params:{
+            id
+        }
+    })
+}

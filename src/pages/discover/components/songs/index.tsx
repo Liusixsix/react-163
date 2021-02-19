@@ -5,10 +5,13 @@ import {SongsWrapper} from './style'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSongsAction } from './store/action'
 import { Pagination } from 'antd'
+import { useHistory } from 'react-router-dom'
 
 const pageSize = 35
 
 export default memo(function Songs() {
+
+    const history = useHistory()
 
     const dispatch = useDispatch()
     const {songs,total} = useSelector((state:any)=>({
@@ -25,6 +28,15 @@ export default memo(function Songs() {
     },[dispatch,page])
 
 
+    const handleClickItem = (e:MouseEvent,item)=>{
+        e.preventDefault()
+        history.push(`/playlist`,{
+            id:item.id,
+            coverImg:item.coverImgUrl,
+            name:item.name
+        })
+    }
+
     return (
         <SongsWrapper className='w980'>
             <HotHeader title='歌单'></HotHeader>
@@ -39,6 +51,7 @@ export default memo(function Songs() {
                                 playCount={item.playCount}
                                 coverImgUrl={item.coverImgUrl}
                                 nickname={item?.creator?.nickname}
+                                handleClickItem={(e)=>handleClickItem(e,item)}
                              ></SongsItem>
                         )
                     })

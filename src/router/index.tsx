@@ -15,6 +15,11 @@ const Ranking = lazy(()=>import('../pages/discover/components/ranking'))
 const Song = lazy(()=>import('../pages/player/index'))
 const Mine = lazy(()=>import('../pages/mine/index'))
 const Songs = lazy(()=>import('../pages/discover/components/songs'))
+const playList = lazy(()=>import('../pages/playlist'))
+const Mv = lazy(()=>import('../pages/mv'))
+const Djradio = lazy(()=>import('../pages/discover/components/djradio'))
+
+
 const router = [
     { path: '/', exact: true, render: () => <Redirect to="/discover" /> },
     {
@@ -41,12 +46,30 @@ const router = [
           {
             path:'/discover/songs',
             component:Songs
+          },
+          {
+            path:'/discover/djradio',
+            component:Djradio
           }
         ]
     },
     {
+      path:'/mv',
+      component: SuspenseComponent(JMDiscover),
+      routes:[
+        {
+          path:'/mv/:id',
+          component:Mv
+        }
+      ]
+    },
+    {
       path:'/mine',
       component:SuspenseComponent(Mine)
+    },
+    {
+      path:'/playlist',
+      component:SuspenseComponent(playList)
     }
    
 ]

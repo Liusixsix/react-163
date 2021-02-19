@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import {SongItemWrapper} from './style'
-import {NavLink} from 'react-router-dom'
-import { PlayCircleOutlined } from '@ant-design/icons'
+import {NavLink, useHistory} from 'react-router-dom'
+import { PlayCircleOutlined,SmallDashOutlined } from '@ant-design/icons'
 import {useDispatch, useSelector} from 'react-redux'
 import { getSongDetailAction } from '@/pages/player/store/action'
 import { useAddPlaylist } from '@/hook'
@@ -15,18 +15,25 @@ interface Iprops{
     songId:number
     dt:number
     ar:any[]
+    mv?:number
 }
 export default memo(function SongItem(props:Iprops) {
-    const {coverPic,songName,songId,currentRanking,dt,ar} = props
+    const {coverPic,songName,songId,currentRanking,dt,ar,mv} = props
 
+    const history = useHistory()
     const dispatch = useDispatch()
     const playList= useSelector((state:any)=>state.getIn(['play','playList']))
-
     const playMusic = (e,isTo=false)=>{
-     if (!isTo) e.preventDefault()
-     dispatch(getSongDetailAction(songId))
+      if (!isTo) e.preventDefault()
+       dispatch(getSongDetailAction(songId))
+       history.push('/discover/song') 
     }
     const addPlaylist  = useAddPlaylist(playList)
+
+    const handleClickMv = ()=>{
+      history.push(`/mv/${mv}`)
+    }
+
     return (
        <SongItemWrapper className={`${currentRanking <=3?'ranking':''}`}>
          <div className={`song-item`}>
@@ -42,6 +49,7 @@ export default memo(function SongItem(props:Iprops) {
                      <a href="/play" onClick={(e) => playMusic(e)}  className="text-nowrap">
                       {songName}
                     </a>
+                    { !!mv&&<SmallDashOutlined style={{marginLeft:5}} onClick={handleClickMv}/>}
                   </div>
                   ):(
                     <div>
@@ -52,9 +60,11 @@ export default memo(function SongItem(props:Iprops) {
                      <a href="/play" onClick={(e) => playMusic(e)}  className="text-nowrap">
                       {songName}
                     </a>
+                    { !!mv&&<SmallDashOutlined style={{marginLeft:5}} onClick={handleClickMv}/>}
                     </div>
                   )
                 }
+               
             </div>
          </div>
          <div className='timer'>
